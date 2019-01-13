@@ -767,8 +767,19 @@ class trainer_ET_Builder_Module_Blog extends ET_Builder_Module_Type_PostBased {
 									);
 								}
 
+								
+								//original code next line
 								//$post_content = et_strip_shortcodes( et_delete_post_first_video( get_the_content() ), true );
-								$post_content = get_field('trainer_bio');
+
+								//replace with  your ACF field(s) below, this will show if excerpt is missing AND  you've set to show excerpt in your module setting
+											// - to add more than one field use $post_content .= syntax after the first variable
+								
+								
+								if { get_field('yourfield') {
+								$post_content = get_field('yourfield');
+								}
+								else { $post_content = et_strip_shortcodes( et_delete_post_first_video( get_the_content() ), true );
+										 }
 										
 								// reset the fb processing flag
 								$et_fb_processing_shortcode_object = false;
@@ -777,7 +788,7 @@ class trainer_ET_Builder_Module_Blog extends ET_Builder_Module_Type_PostBased {
 								// reset all the attributes required to properly generate the internal styles
 								ET_Builder_Element::clean_internal_modules_styles();
 
-								echo '<div class="post-content TEST">';
+								echo '<div class="post-content">';
 
 								if ( 'on' === $args['show_content'] ) {
 									global $more;
